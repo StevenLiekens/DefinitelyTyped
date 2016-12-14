@@ -626,9 +626,23 @@ interface JQueryEasingFunctions {
 }
 
 /**
+ * The prototype of jQuery
+ */
+interface JQueryProto {
+    /**
+     *  A string containing the jQuery version number.
+     *
+     * @type {string}
+     * @memberOf JQueryProto
+     */
+    jquery: string;
+    extend(object: any): JQueryProto;
+}
+
+/**
  * Static members of jQuery (those on $ and jQuery themselves)
  */
-interface JQueryStatic {
+interface JQueryStatic extends JQueryProto {
 
     /**
      * Perform an asynchronous HTTP (Ajax) request.
@@ -963,7 +977,7 @@ interface JQueryStatic {
     error(message: any): JQuery;
 
     expr: any;
-    fn: any;  //TODO: Decide how we want to type this
+    fn: JQueryProto;
 
     isReady: boolean;
 
