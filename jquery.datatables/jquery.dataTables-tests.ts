@@ -274,6 +274,8 @@ $(document).ready(function () {
     dt = $('#example1').DataTable(config);
     dt = $('#example1').DataTable(config);
     dt.$('tr:odd').css('backgroundColor', 'blue');
+    dt = new $.fn.dataTable.Api(config);
+
 
     //#endregion "Init"
 
@@ -890,15 +892,12 @@ $(document).ready(function () {
 
     //#region "Methods-Static"
 
-    // Variable is a stand-in for $.fn.dataTable. See extension of JQueryStatic at the top of jquery.dataTables.d.ts.
-    var staticFn: DataTables.StaticFunctions;
-
     // With boolean parameter type, always returns DataTables.DataTable[].
-    var static_1: DataTables.DataTable[] = <DataTables.DataTable[]>staticFn.tables(true);
+    var static_1: DataTables.DataTable[] = <DataTables.DataTable[]> $.fn.dataTable.tables(true);
     // With object parameter type, returns DataTables.DataTable[] when "api" property is false.
-    static_1 = <DataTables.DataTable[]>staticFn.tables({ "visible": true, "api": false });
+    static_1 = <DataTables.DataTable[]> $.fn.dataTable.tables({ "visible": true, "api": false });
     // With object parameter type, returns DataTables.DataTable when "api" property is true.
-    var static_2: DataTables.DataTable = <DataTables.DataTable>staticFn.tables({ "visible": true, "api": true });
+    var static_2: DataTables.DataTable = <DataTables.DataTable> $.fn.dataTable.tables({ "visible": true, "api": true });
 
     //#endregion "Methods-Static"
 

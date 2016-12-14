@@ -14,10 +14,9 @@ interface JQuery {
     DataTable(param?: DataTables.Settings): DataTables.DataTable;
 }
 
-//TODO: Wrong, as jquery.d.ts has no interface for fn
-//interface JQueryStatic {
-//    dataTable: DataTables.StaticFunctions;
-//}
+interface JQueryProto {
+    dataTable: DataTables.StaticFunctions;
+}
 
 declare namespace DataTables {
     export interface DataTable extends DataTableCore {
@@ -908,7 +907,7 @@ declare namespace DataTables {
         * @param d Data to use for the row.
         */
         data(d: any[] | Object): DataTable;
-        
+
         /**
 
         * Get the id of the selected row. Since: 1.10.8
@@ -1094,12 +1093,7 @@ declare namespace DataTables {
         */
         util: StaticUtilFunctions;
 
-        /**
-        * Check is a table node is a DataTable or not
-        *
-        * @param table Selector string for table
-        */
-        Api(selector: string | Node | Node[] | JQuery): DataTables.DataTable;
+        Api: (new (settings: DataTables.Settings) => DataTables.DataTable);
     }
 
     export interface StaticUtilFunctions {
