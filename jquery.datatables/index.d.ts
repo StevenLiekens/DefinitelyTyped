@@ -22,6 +22,8 @@ interface JQuery {
 declare namespace DataTables {
     type CellSelector = undefined | string | (HTMLTableCellElement | Node) | ((index: number, data: any, node?: Node) => boolean) | JQuery | CellIndex;
 
+    type ColumnSelector = undefined | number | string | (HTMLTableCellElement | Node) | ((index: number, data: any, node: Node) => boolean) | JQuery;
+
     export interface DataTable extends DataTableCore {
         /**
         * Get the data for the whole table.
@@ -720,7 +722,7 @@ declare namespace DataTables {
         * @param columnSelector Column selector.
         * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
         */
-        (columnSelector: any, modifier?: ObjectSelectorModifier): ColumnMethods;
+        (columnSelector?: ColumnSelector | ColumnSelector[], modifier?: ObjectSelectorModifier): ColumnMethods;
 
         /**
         * Convert from the input column index type to that required.
@@ -769,7 +771,7 @@ declare namespace DataTables {
         * @param columnSelector Column selector.
         * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
         */
-        (columnSelector: any, modifier?: ObjectSelectorModifier): ColumnsMethods;
+        (columnSelector?: ColumnSelector | ColumnSelector[], modifier?: ObjectSelectorModifier): ColumnsMethods;
 
         /**
         * Recalculate the column widths for layout.
