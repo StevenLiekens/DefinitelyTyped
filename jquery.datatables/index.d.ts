@@ -24,6 +24,8 @@ declare namespace DataTables {
 
     type ColumnSelector = undefined | number | string | (HTMLTableCellElement | Node) | ((index: number, data: any, node: Node) => boolean) | JQuery;
 
+    type RowSelector = undefined | number | string | (HTMLTableCellElement | Node) | ((index: number, data: any, node?: Node) => boolean) | JQuery;
+
     export interface DataTable extends DataTableCore {
         /**
         * Get the data for the whole table.
@@ -52,7 +54,7 @@ declare namespace DataTables {
         * @param cellSelector Cell selector.
         * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
         */
-        cell(rowSelector: (string | Node | Function | JQuery | Object) | (string | Node | Function | JQuery | Object)[], cellSelector?: CellSelector | CellSelector[], modifier?: ObjectSelectorModifier): CellMethods;
+        cell(rowSelector?: RowSelector | RowSelector[], cellSelector?: CellSelector | CellSelector[], modifier?: ObjectSelectorModifier): CellMethods;
 
         /**
         * Select all cells
@@ -76,7 +78,7 @@ declare namespace DataTables {
         * @param cellSelector Cell selector.
         * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
         */
-        cells(rowSelector: (string | Node | Function | JQuery | Object) | (string | Node | Function | JQuery | Object)[], cellSelector?: CellSelector | CellSelector[], modifier?: ObjectSelectorModifier): CellsMethods;
+        cells(rowSelector?: RowSelector | RowSelector[], cellSelector?: CellSelector | CellSelector[], modifier?: ObjectSelectorModifier): CellsMethods;
         //#endregion "Cell/Cells"
 
         //#region "Column/Columns"
@@ -888,7 +890,7 @@ declare namespace DataTables {
         * @param rowSelector Row selector.
         * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
         */
-        (rowSelector: any, modifier?: ObjectSelectorModifier): RowMethods;
+        (rowSelector?: RowSelector | RowSelector[], modifier?: ObjectSelectorModifier): RowMethods;
 
         /**
         * Add a new row to the table using the given data
@@ -956,7 +958,7 @@ declare namespace DataTables {
         * @param rowSelector Row selector.
         * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
         */
-        (rowSelector: any, modifier?: ObjectSelectorModifier): RowsMethods;
+        (rowSelector?: RowSelector | RowSelector[], modifier?: ObjectSelectorModifier): RowsMethods;
 
         /**
         * Add new rows to the table using the data given
