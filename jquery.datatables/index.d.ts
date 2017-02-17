@@ -26,6 +26,8 @@ declare namespace DataTables {
 
     type RowSelector = undefined | number | string | (HTMLTableCellElement | Node) | ((index: number, data: any, node?: Node) => boolean) | JQuery;
 
+    type TableSelector = undefined | number | string | (HTMLTableElement | Node) | JQuery;
+
     export interface DataTable extends DataTableCore {
         /**
         * Get the data for the whole table.
@@ -116,19 +118,14 @@ declare namespace DataTables {
         *
         * @param tableSelector Table selector.
         */
-        table(tableSelector: (string | Node | Function | JQuery | Object) | (string | Node | Function | JQuery | Object)[]): TableMethods;
-
-        /**
-        * Select all tables
-        */
-        tables(): TablesMethods;
+        table(tableSelector?: TableSelector | TableSelector[]): TableMethods;
 
         /**
         * Select tables based on the given selector
         *
         * @param tableSelector Table selector.
         */
-        tables(tableSelector: (string | Node | Function | JQuery | Object) | (string | Node | Function | JQuery | Object)[]): TablesMethods;
+        tables(tableSelector?: TableSelector | TableSelector[]): TablesMethods;
 
         //#endregion "Table/Tables"
     }
