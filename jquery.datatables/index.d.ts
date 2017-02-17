@@ -20,6 +20,8 @@ interface JQuery {
 //}
 
 declare namespace DataTables {
+    type CellSelector = undefined | string | (HTMLTableCellElement | Node) | ((index: number, data: any, node?: Node) => boolean) | JQuery | CellIndex;
+
     export interface DataTable extends DataTableCore {
         /**
         * Get the data for the whole table.
@@ -39,7 +41,7 @@ declare namespace DataTables {
         * @param cellSelector Cell selector.
         * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
         */
-        cell(cellSelector: (string | Node | Function | JQuery | Object) | (string | Node | Function | JQuery | Object)[], modifier?: ObjectSelectorModifier): CellMethods;
+        cell(cellSelector?: CellSelector | CellSelector[], modifier?: ObjectSelectorModifier): CellMethods;
 
         /**
         * Select the cell found by a cell selector
@@ -48,7 +50,7 @@ declare namespace DataTables {
         * @param cellSelector Cell selector.
         * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
         */
-        cell(rowSelector: (string | Node | Function | JQuery | Object) | (string | Node | Function | JQuery | Object)[], cellSelector: (string | Node | Function | JQuery | Object) | (string | Node | Function | JQuery | Object)[], modifier?: ObjectSelectorModifier): CellMethods;
+        cell(rowSelector: (string | Node | Function | JQuery | Object) | (string | Node | Function | JQuery | Object)[], cellSelector?: CellSelector | CellSelector[], modifier?: ObjectSelectorModifier): CellMethods;
 
         /**
         * Select all cells
@@ -63,7 +65,7 @@ declare namespace DataTables {
         * @param cellSelector Cell selector.
         * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
         */
-        cells(cellSelector: (string | Node | Function | JQuery | Object) | (string | Node | Function | JQuery | Object)[], modifier?: ObjectSelectorModifier): CellsMethods;
+        cells(cellSelector?: CellSelector | CellSelector[], modifier?: ObjectSelectorModifier): CellsMethods;
 
         /**
         * Select cells found by both row and column selectors
@@ -72,7 +74,7 @@ declare namespace DataTables {
         * @param cellSelector Cell selector.
         * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
         */
-        cells(rowSelector: (string | Node | Function | JQuery | Object) | (string | Node | Function | JQuery | Object)[], cellSelector: (string | Node | Function | JQuery | Object) | (string | Node | Function | JQuery | Object)[], modifier?: ObjectSelectorModifier): CellsMethods;
+        cells(rowSelector: (string | Node | Function | JQuery | Object) | (string | Node | Function | JQuery | Object)[], cellSelector?: CellSelector | CellSelector[], modifier?: ObjectSelectorModifier): CellsMethods;
         //#endregion "Cell/Cells"
 
         //#region "Column/Columns"
@@ -643,9 +645,12 @@ declare namespace DataTables {
         node(): Node;
     }
 
-    interface CellIndexReturn {
+    interface CellIndex {
         row: number;
         column: number;
+    }
+
+    interface CellIndexReturn extends CellIndex {
         columnVisible: number;
     }
 
@@ -712,7 +717,7 @@ declare namespace DataTables {
         /**
         * Select the column found by a column selector
         *
-        * @param cellSelector Cell selector.
+        * @param columnSelector Column selector.
         * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
         */
         (columnSelector: any, modifier?: ObjectSelectorModifier): ColumnMethods;
@@ -759,9 +764,9 @@ declare namespace DataTables {
         (modifier?: ObjectSelectorModifier): ColumnsMethods;
 
         /**
-        * Select columns found by a cell selector
+        * Select columns found by a column selector
         *
-        * @param cellSelector Cell selector.
+        * @param columnSelector Column selector.
         * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
         */
         (columnSelector: any, modifier?: ObjectSelectorModifier): ColumnsMethods;
@@ -946,7 +951,7 @@ declare namespace DataTables {
         /**
         * Select rows found by a row selector
         *
-        * @param cellSelector Row selector.
+        * @param rowSelector Row selector.
         * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
         */
         (rowSelector: any, modifier?: ObjectSelectorModifier): RowsMethods;
