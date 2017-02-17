@@ -139,19 +139,19 @@ declare namespace DataTables {
         * The order modifier provides the ability to control which order the rows are processed in.
         * Values: 'current', 'applied', 'index',  'original'
         */
-        order?: string;
+        order?: 'current' | 'applied' | 'index' | 'original';
 
         /**
         * The search modifier provides the ability to govern which rows are used by the selector using the search options that are applied to the table.
         * Values: 'none', 'applied', 'removed'
         */
-        search?: string;
+        search?: 'none' | 'applied' | 'removed';
 
         /**
         * The page modifier allows you to control if the selector should consider all data in the table, regardless of paging, or if only the rows in the currently disabled page should be used.
         * Values: 'all', 'current'
         */
-        page?: string;
+        page?: 'all' | 'current';
     }
 
     //#region "Namespaces"
