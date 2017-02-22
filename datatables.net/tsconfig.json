@@ -1,12 +1,12 @@
 {
+    "files": [
+        "index.d.ts",
+        "datatables.net-tests.ts"
+    ],
     "compilerOptions": {
         "module": "commonjs",
-        "lib": [
-            "es6",
-            "dom"
-        ],
+        "target": "es6",
         "noImplicitAny": true,
-        "noImplicitThis": false,
         "strictNullChecks": false,
         "baseUrl": "../",
         "typeRoots": [
@@ -15,9 +15,5 @@
         "types": [],
         "noEmit": true,
         "forceConsistentCasingInFileNames": true
-    },
-    "files": [
-        "index.d.ts",
-        "jquery.datatables-tests.ts"
-    ]
+    }
 }

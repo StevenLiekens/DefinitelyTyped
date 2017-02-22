@@ -1,10 +1,10 @@
-// Type definitions for JQuery DataTables Buttons extension 1.1.0
+// Type definitions for datatables.net-buttons 1.1.0
 // Project: http://datatables.net/extensions/buttons/
 // Definitions by: Sam Germano <https://github.com/SammyG4Free>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
 /// <reference types="jquery" />
-/// <reference types="jquery.datatables"/>
+/// <reference types="datatables.net"/>
 
 declare namespace DataTables {
     export interface Settings {
