@@ -50,50 +50,50 @@ declare namespace DataTables {
     }
 
     interface CellMethods {
-        deselect(): DataTable;
-        select(): DataTable;
+        deselect(): Api;
+        select(): Api;
     }
 
     interface CellsMethods {
-        deselect(): DataTable;
-        select(): DataTable;
+        deselect(): Api;
+        select(): Api;
     }
 
     interface ColumnMethods {
-        deselect(): DataTable;
-        select(): DataTable;
+        deselect(): Api;
+        select(): Api;
     }
 
     interface ColumnsMethods {
-        deselect(): DataTable;
-        select(): DataTable;
+        deselect(): Api;
+        select(): Api;
     }
 
     interface RowMethods {
-        deselect(): DataTable;
-        select(): DataTable;
+        deselect(): Api;
+        select(): Api;
     }
 
     interface RowsMethods {
-        deselect(): DataTable;
-        select(): DataTable;
+        deselect(): Api;
+        select(): Api;
     }
 
     interface Select {
-        (): DataTable;
+        (): Api;
         blurable(): boolean;
-        blurable(flag: boolean): DataTable;
+        blurable(flag: boolean): Api;
         info(): boolean;
-        info(flag: boolean): DataTable;
+        info(flag: boolean): Api;
         items(): SelectItems;
-        items(set: SelectItems): DataTable;
+        items(set: SelectItems): Api;
         selector(): string;
-        selector(set: string): DataTable;
+        selector(set: string): Api;
         style(): SelectStyle;
-        style(set: SelectStyle): DataTable;
+        style(set: SelectStyle): Api;
     }
 
-    interface DataTable {
+    interface Api {
         select: Select;
     }
 
