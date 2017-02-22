@@ -42,45 +42,21 @@ declare namespace DataTables {
         //#region "Cell/Cells"
 
         /**
-        * Select the cell found by a cell selector
-        *
-        * @param cellSelector Cell selector.
-        * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
-        */
-        cell(cellSelector?: CellSelector | CellSelector[], modifier?: ObjectSelectorModifier): CellMethods;
+         * Cell Methods / Object
+         *
+         * @type {CellMethodsModel}
+         * @memberOf DataTable
+         */
+        cell: CellMethodsModel;
 
         /**
-        * Select the cell found by a cell selector
-        *
-        * @param rowSelector Row selector.
-        * @param cellSelector Cell selector.
-        * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
-        */
-        cell(rowSelector?: RowSelector | RowSelector[], cellSelector?: CellSelector | CellSelector[], modifier?: ObjectSelectorModifier): CellMethods;
+         * Cells Methods / Object
+         *
+         * @type {CellsMethodsModel}
+         * @memberOf DataTable
+         */
+        cells: CellsMethodsModel;
 
-        /**
-        * Select all cells
-        *
-        * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
-        */
-        cells(modifier?: ObjectSelectorModifier): CellsMethods;
-
-        /**
-        * Select cells found by a cell selector
-        *
-        * @param cellSelector Cell selector.
-        * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
-        */
-        cells(cellSelector?: CellSelector | CellSelector[], modifier?: ObjectSelectorModifier): CellsMethods;
-
-        /**
-        * Select cells found by both row and column selectors
-        *
-        * @param rowSelector Row selector.
-        * @param cellSelector Cell selector.
-        * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
-        */
-        cells(rowSelector?: RowSelector | RowSelector[], cellSelector?: CellSelector | CellSelector[], modifier?: ObjectSelectorModifier): CellsMethods;
         //#endregion "Cell/Cells"
 
         //#region "Column/Columns"
@@ -622,6 +598,25 @@ declare namespace DataTables {
         render(t: string): any;
     }
 
+    interface CellMethodsModel {
+        /**
+        * Select the cell found by a cell selector
+        *
+        * @param cellSelector Cell selector.
+        * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
+        */
+        (cellSelector?: CellSelector | CellSelector[], modifier?: ObjectSelectorModifier): CellMethods;
+
+        /**
+        * Select the cell found by a cell selector
+        *
+        * @param rowSelector Row selector.
+        * @param cellSelector Cell selector.
+        * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
+        */
+        (rowSelector?: RowSelector | RowSelector[], cellSelector?: CellSelector | CellSelector[], modifier?: ObjectSelectorModifier): CellMethods;
+    }
+
     interface CellMethods extends DataTableCore, CommonCellMethods {
         /**
         * Get data for the selected cell
@@ -653,6 +648,32 @@ declare namespace DataTables {
 
     interface CellIndexReturn extends CellIndex {
         columnVisible: number;
+    }
+
+    interface CellsMethodsModel {
+        /**
+        * Select all cells
+        *
+        * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
+        */
+        (modifier?: ObjectSelectorModifier): CellsMethods;
+
+        /**
+        * Select cells found by a cell selector
+        *
+        * @param cellSelector Cell selector.
+        * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
+        */
+        (cellSelector?: CellSelector | CellSelector[], modifier?: ObjectSelectorModifier): CellsMethods;
+
+        /**
+        * Select cells found by both row and column selectors
+        *
+        * @param rowSelector Row selector.
+        * @param cellSelector Cell selector.
+        * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
+        */
+        (rowSelector?: RowSelector | RowSelector[], cellSelector?: CellSelector | CellSelector[], modifier?: ObjectSelectorModifier): CellsMethods;
     }
 
     interface CellsMethods extends DataTableCore, CommonCellMethods {

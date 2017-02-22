@@ -423,9 +423,9 @@ $(document).ready(function () {
 
     var cells = dt.cells();
     cells = dt.cells(":contains('Not shipped')");
-    cells = dt.cells(function () { });
+    cells = dt.cells(function (index, data, node) { return true || false; });
     cells = dt.cells($(""));
-    cells = dt.cells({});
+    cells = dt.cells(modifier);
     cells = dt.cells(":contains('Not shipped')r", modifier);
     cells = dt.cells("row-selector", "cells-selector", modifier);
 
@@ -491,9 +491,10 @@ $(document).ready(function () {
     cells.every(function (cellRowIdx, cellColIdx, tableLoop, cellLoop) { });
 
     var cell = dt.cell(":contains('Not shipped')");
-    cell = dt.cell(function () { });
+    cell = dt.cell();
+    cell = dt.cell(function (index, data, node) { return true || false; });
     cell = dt.cell($(""));
-    cell = dt.cell({});
+    cell = dt.cell({ row: 0, column: 0 });
     cell = dt.cell(":contains('Not shipped')r", modifier);
     cell = dt.cell("row-selector", "cells-selector", modifier);
 
