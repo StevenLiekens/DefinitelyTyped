@@ -1,6 +1,6 @@
 // Type definitions for datatables.net
 // Project: https://datatables.net/
-// Definitions by: Kiarash Ghiaseddin <https://github.com/Silver-Connection/DefinitelyTyped>, Omid Rad <https://github.com/omidkrad>, Armin Sander <https://github.com/pragmatrix/>, Steven Liekens <steven.liekens@gmail.com>
+// Definitions by: Kiarash Ghiaseddin <https://github.com/Silver-Connection/DefinitelyTyped>, Omid Rad <https://github.com/omidkrad>, Armin Sander <https://github.com/pragmatrix/>, Steven Liekens <https://github.com/StevenLiekens>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
 
