@@ -16,118 +16,79 @@ interface JQuery {
 }
 
 declare namespace DataTables {
+    interface CellSelectorFunction {
+        (index: number, data: any, node: HTMLTableCellElement): boolean
+    }
+
+    type CellSelector = string | Element | CellSelectorFunction | JQuery | CellIndex | CellSelectorArray | CellSelectorArrayLike;
+
+    interface CellSelectorArray extends Array<CellSelector> { }
+
+    interface CellSelectorArrayLike extends ArrayLike<CellSelector> { }
+
+    interface ColumnSelectorFunction {
+        (index: number, data: any, node: HTMLTableCellElement): boolean
+    }
+
+    type ColumnSelector = number | string | Element | ColumnSelectorFunction | JQuery | ColumnSelectorArray | ColumnSelectorArrayLike;
+
+    interface ColumnSelectorArray extends Array<ColumnSelector> { }
+
+    interface ColumnSelectorArrayLike extends ArrayLike<ColumnSelector> { }
+
+    interface RowSelectorFunction {
+        (index: number, data: any, node: HTMLTableRowElement): boolean
+    }
+
+    type RowSelector = number | string | Element | RowSelectorFunction | JQuery | RowSelectorArray | RowSelectorArrayLike;
+
+    interface RowSelectorArray extends Array<RowSelector> { }
+
+    interface RowSelectorArrayLike extends ArrayLike<RowSelector> { }
+
+    type TableSelector = number | string | Element | JQuery | TableSelectorArray | TableSelectorArrayLike;
+
+    interface TableSelectorArray extends Array<TableSelector> { }
+
+    interface TableSelectorArrayLike extends ArrayLike<TableSelector> { }
+
     export interface Api extends CoreMethods {
         /**
         * Get the data for the whole table.
         */
         data(): Api;
 
-        /**
-        * Order Methods / Object
-        */
         order: OrderMethods;
 
-        //#region "Cell/Cells"
+        cell: CellMethodsModel;
 
-        /**
-        * Select the cell found by a cell selector
-        *
-        * @param cellSelector Cell selector.
-        * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
-        */
-        cell(cellSelector: (string | Node | Function | JQuery | Object) | Array<string | Node | Function | JQuery | Object>, modifier?: ObjectSelectorModifier): CellMethods;
+        cells: CellsMethodsModel;
 
-        /**
-        * Select the cell found by a cell selector
-        *
-        * @param rowSelector Row selector.
-        * @param cellSelector Cell selector.
-        * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
-        */
-        cell(rowSelector: (string | Node | Function | JQuery | Object) | Array<string | Node | Function | JQuery | Object>, cellSelector: (string | Node | Function | JQuery | Object) | Array<string | Node | Function | JQuery | Object>, modifier?: ObjectSelectorModifier): CellMethods;
-
-        /**
-        * Select all cells
-        *
-        * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
-        */
-        cells(modifier?: ObjectSelectorModifier): CellsMethods;
-
-        /**
-        * Select cells found by a cell selector
-        *
-        * @param cellSelector Cell selector.
-        * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
-        */
-        cells(cellSelector: (string | Node | Function | JQuery | Object) | Array<string | Node | Function | JQuery | Object>, modifier?: ObjectSelectorModifier): CellsMethods;
-
-        /**
-        * Select cells found by both row and column selectors
-        *
-        * @param rowSelector Row selector.
-        * @param cellSelector Cell selector.
-        * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
-        */
-        cells(rowSelector: (string | Node | Function | JQuery | Object) | Array<string | Node | Function | JQuery | Object>, cellSelector: (string | Node | Function | JQuery | Object) | Array<string | Node | Function | JQuery | Object>, modifier?: ObjectSelectorModifier): CellsMethods;
-        //#endregion "Cell/Cells"
-
-        //#region "Column/Columns"
-
-        /**
-        * Column Methods / Object
-        */
         column: ColumnMethodsModel;
 
-        /**
-        * Columns Methods / Object
-        */
         columns: ColumnsMethodsModel;
 
-        //#endregion "Column/Columns"
+        row: RowMethodsModel
 
-        //#region "Row/Rows"
-
-        /**
-        * Row Methode / Object
-        */
-        row: RowMethodsModel;
+        rows: RowsMethodsModel
 
         /**
-        * Rows Methods / Object
-        */
-        rows: RowsMethodsModel;
+         * Select a table based on a selector from the API's context.
+         *
+         * @type {TableMethodsModel}
+         * @memberof Api
+         */
+        table: TableMethodsModel;
 
-        //#endregion "Row/Rows"
-
-        //#region "Table/Tables"
-
-        /**
-        * Select a table based on a selector from the API's context
-        *
-        * @param tableSelector Table selector.
-        */
-        table(tableSelector: (string | Node | Function | JQuery | Object) | Array<string | Node | Function | JQuery | Object>): TableMethods;
-
-        /**
-        * Select all tables
-        */
-        tables(): TablesMethods;
-
-        /**
-        * Select tables based on the given selector
-        *
-        * @param tableSelector Table selector.
-        */
-        tables(tableSelector: (string | Node | Function | JQuery | Object) | Array<string | Node | Function | JQuery | Object>): TablesMethods;
-
-        //#endregion "Table/Tables"
+        tables: TablesMethodsModel;
     }
 
     export interface DataTables extends CoreMethods {
         [index: number]: Api;
     }
 
-    interface ObjectSelectorModifier {
+
+    interface SelectorModifier {
         /**
         * The order modifier provides the ability to control which order the rows are processed in.
         * Values: 'current', 'applied', 'index',  'original'
@@ -160,10 +121,10 @@ declare namespace DataTables {
         /**
         * Get jquery object
         */
-        $(selector: string | Node | Node[] | JQuery, modifier?: ObjectSelectorModifier): JQuery;
+        $(selector: string | Node | Node[] | JQuery, modifier?: SelectorModifier): JQuery;
 
         ///// Almost identical to $ in operation, but in this case returns the data for the matched rows.
-        //_(selector: string | Node | Node[] | JQuery, modifier?: ObjectSelectorModifier): JQuery;
+        //_(selector: string | Node | Node[] | JQuery, modifier?: SelectorModifier): JQuery;
 
         /**
         * Ajax Methods
@@ -603,6 +564,14 @@ declare namespace DataTables {
     }
 
     //#region "cell-methods"
+    interface CellIndex {
+        row: number;
+        column: number;
+    }
+
+    interface CellIndexReturn extends CellIndex {
+        columnVisible: number;
+    }
 
     interface CommonCellMethods extends CommonSubMethods {
         /**
@@ -618,6 +587,32 @@ declare namespace DataTables {
         * @param f Data type to get. This can be one of: 'display', 'filter', 'sort', 'type'
         */
         render(t: string): any;
+    }
+
+    interface CellMethodsModel {
+        /**
+        * Select a cell
+        *
+        * @param modifier Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
+        */
+        (modifier?: SelectorModifier): CellMethods;
+
+        /**
+        * Select a cell found by a cell selector
+        *
+        * @param cellSelector Cell selector.
+        * @param modifier Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
+        */
+        (cellSelector: CellSelector, modifier?: SelectorModifier): CellMethods;
+
+        /**
+        * Select a cell found by a cell selector
+        *
+        * @param rowSelector Row selector, used to specify which row the cell should be taken from.
+        * @param columnSelector Column selector, used to specify which column the cell should be taken from.
+        * @param modifier Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
+        */
+        (rowSelector: RowSelector, columnSelector: ColumnSelector, modifier?: SelectorModifier): CellMethods;
     }
 
     interface CellMethods extends CoreMethods, CommonCellMethods {
@@ -644,10 +639,30 @@ declare namespace DataTables {
         node(): Node;
     }
 
-    interface CellIndexReturn {
-        row: number;
-        column: number;
-        columnVisible: number;
+    interface CellsMethodsModel {
+        /**
+        * Select cells
+        *
+        * @param modifier Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
+        */
+        (modifier?: SelectorModifier): CellsMethods;
+
+        /**
+        * Select cells found by a cell selector
+        *
+        * @param cellSelector Cell selector.
+        * @param modifier Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
+        */
+        (cellSelector: CellSelector, modifier?: SelectorModifier): CellsMethods;
+
+        /**
+        * Select cells found by both row and column selectors
+        *
+        * @param rowSelector Row selector.
+        * @param columnSelector Column selector.
+        * @param modifier Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
+        */
+        (rowSelector: RowSelector, columnSelector: ColumnSelector, modifier?: SelectorModifier): CellsMethods;
     }
 
     interface CellsMethods extends CoreMethods, CommonCellMethods {
@@ -711,12 +726,19 @@ declare namespace DataTables {
 
     interface ColumnMethodsModel {
         /**
-        * Select the column found by a column selector
+        * Select a column
         *
-        * @param cellSelector Cell selector.
-        * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
+        * @param modifier Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
         */
-        (columnSelector: any, modifier?: ObjectSelectorModifier): ColumnMethods;
+        (modifier?: SelectorModifier): ColumnMethods;
+
+        /**
+        * Select a column found by a column selector
+        *
+        * @param columnSelector Column selector.
+        * @param modifier Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
+        */
+        (columnSelector: ColumnSelector, modifier?: SelectorModifier): ColumnMethods;
 
         /**
         * Convert from the input column index type to that required.
@@ -753,19 +775,19 @@ declare namespace DataTables {
 
     interface ColumnsMethodsModel {
         /**
-        * Select all columns
+        * Select columns
         *
-        * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
+        * @param modifier Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
         */
-        (modifier?: ObjectSelectorModifier): ColumnsMethods;
+        (modifier?: SelectorModifier): ColumnsMethods;
 
         /**
         * Select columns found by a cell selector
         *
         * @param cellSelector Cell selector.
-        * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
+        * @param modifier Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
         */
-        (columnSelector: any, modifier?: ObjectSelectorModifier): ColumnsMethods;
+        (columnSelector: ColumnSelector, modifier?: SelectorModifier): ColumnsMethods;
 
         /**
         * Recalculate the column widths for layout.
@@ -877,12 +899,19 @@ declare namespace DataTables {
 
     interface RowMethodsModel {
         /**
+        * Select a row
+        *
+        * @param modifier Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
+        */
+        (modifier?: SelectorModifier): RowMethods;
+
+        /**
         * Select a row found by a row selector
         *
         * @param rowSelector Row selector.
-        * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
+        * @param modifier Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
         */
-        (rowSelector: any, modifier?: ObjectSelectorModifier): RowMethods;
+        (rowSelector: RowSelector, modifier?: SelectorModifier): RowMethods;
 
         /**
         * Add a new row to the table using the given data
@@ -938,19 +967,19 @@ declare namespace DataTables {
 
     interface RowsMethodsModel {
         /**
-        * Select all rows
+        * Select rows
         *
-        * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
+        * @param modifier Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
         */
-        (modifier?: ObjectSelectorModifier): RowsMethods;
+        (modifier?: SelectorModifier): RowsMethods;
 
         /**
         * Select rows found by a row selector
         *
-        * @param cellSelector Row selector.
-        * @param Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
+        * @param rowSelector Row selector.
+        * @param modifier Option used to specify how the cells should be ordered, and if paging or filtering in the table should be taken into account.
         */
-        (rowSelector: any, modifier?: ObjectSelectorModifier): RowsMethods;
+        (rowSelector: RowSelector, modifier?: SelectorModifier): RowsMethods;
 
         /**
         * Add new rows to the table using the data given
@@ -1008,6 +1037,15 @@ declare namespace DataTables {
 
     //#region "table-methods"
 
+    interface TableMethodsModel {
+        /**
+        * Select a table based on the given selector
+        *
+        * @param tableSelector Table selector.
+        */
+        (tableSelector?: TableSelector): TableMethods;
+    }
+
     interface TableMethods extends CoreMethods {
         /**
         * Get the tfoot node for the table in the API's context
@@ -1033,6 +1071,20 @@ declare namespace DataTables {
         * Get the table node for the table in the API's context
         */
         node(): Node;
+    }
+
+    interface TablesMethodsModel {
+        /**
+         * Select all tables
+         */
+        (): TablesMethods;
+
+        /**
+        * Select tables based on the given selector
+        *
+        * @param tableSelector Table selector.
+        */
+        (tableSelector: TableSelector): TablesMethods;
     }
 
     interface TablesMethods extends CoreMethods {

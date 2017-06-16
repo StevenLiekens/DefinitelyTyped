@@ -417,7 +417,7 @@ $(document).ready(function () {
 
     //#endregion "Methods-Core"
 
-    var modifier: DataTables.ObjectSelectorModifier = {
+    var modifier: DataTables.SelectorModifier = {
         order: "current",
         search: "none",
         searchPlaceholder: "Default text",
@@ -495,13 +495,7 @@ $(document).ready(function () {
     cells.every(function () { });
     cells.every(function (cellRowIdx, cellColIdx, tableLoop, cellLoop) { });
 
-    var cell = dt.cell(":contains('Not shipped')");
-    cell = dt.cell(function () { });
-    cell = dt.cell($(""));
-    cell = dt.cell({});
-    cell = dt.cell(":contains('Not shipped')r", modifier);
-    cell = dt.cell("row-selector", "cells-selector", modifier);
-
+    var cell = dt.cell();
     var cell_cache = cell.cache("search");
     $('#example tbody').on('click', 'td', function () {
         alert(dt.cell(this).cache('order'));
@@ -968,3 +962,590 @@ $(document).ready(function () {
 
     //#endregion "Methods-Util"
 });
+
+// table-selector tests
+// https://datatables.net/reference/type/table-selector
+() => {
+    let tableSelector: DataTables.TableSelector;
+
+    // No selector - Select all tables
+    tableSelector = undefined;
+
+    // integer - Table index selector
+    tableSelector = 0;
+
+    // string - jQuery selector
+    tableSelector = '#example';
+
+    // node - table element selector
+    tableSelector = document.querySelector('table');
+
+    // jQuery - jQuery object of table nodes
+    tableSelector = $('#example');
+
+    // array - Array containing any combination of the above options
+    tableSelector = [undefined, 0, '#example', document.querySelector('table'), $('#example')];
+};
+
+// row-selector tests
+// https://datatables.net/reference/type/row-selector
+() => {
+    let rowSelector: DataTables.RowSelector;
+
+    // No selector - Select all rows
+    rowSelector = undefined;
+
+    // integer - Row index selector
+    rowSelector = 0;
+
+    // string - ID selector
+    rowSelector = '#row-42';
+
+    // string - jQuery selector
+    rowSelector = '.important';
+
+    // node - table row element
+    rowSelector = document.querySelector('tr');
+
+    // node - table cell element (Since: 1.10.11)
+    rowSelector = document.querySelector('td');
+
+    // node - Any element which has a data-dt-row attribute assigned to it, or a parent
+    rowSelector = document.querySelector('[data-dt-row]');
+    rowSelector = document.querySelector('[data-dt-row]').parentElement;
+
+    // function - Function selector (Since: 1.10.3)
+    rowSelector = (index: number, data: any, node: HTMLTableRowElement) => true || false;
+
+    // jQuery - jQuery object of row nodes
+    rowSelector = $('tr.immediate');
+
+    // array - Array containing any combination of the above options
+    rowSelector = [
+        undefined,
+        0,
+        '#row-42',
+        '.important',
+        document.querySelector('tr'),
+        document.querySelector('td'),
+        document.querySelector('[data-dt-row]'),
+        document.querySelector('[data-dt-row]').parentElement,
+        (index: number, data: any, node: HTMLTableRowElement) => true || false,
+        $('tr.immediate')
+    ];
+};
+
+// column-selector tests
+// https://datatables.net/reference/type/column-selector
+() => {
+    let columnSelector: DataTables.ColumnSelector;
+
+    // No selector - Select all columns
+    columnSelector = undefined;
+
+    // integer - Column index selector
+    columnSelector = 0;
+
+    // {integer}:visIdx - Column visible index selector (e.g. 3:visIdx)
+    columnSelector = '3:visIdx';
+
+    // {integer}:visible - Alias of {integer}:visIdx.
+    columnSelector = '3:visible';
+
+    // {string}:name - Column name selector, from columns.name (e.g. salary:name)
+    columnSelector = 'salary:name';
+
+    // string - jQuery selector
+    columnSelector = 'td:nth-of-type(5)';
+
+    // node - th or td cell from the column headers
+    columnSelector = document.querySelector('th');
+
+    // node - td cell from the table body (Since: 1.10.11)
+    columnSelector = document.querySelector('td');
+
+    // node - Any element which has a data-dt-column attribute assigned to it, or a parent (Since: 1.10.11)
+    columnSelector = document.querySelector('[data-dt-column]');
+    columnSelector = document.querySelector('[data-dt-column]').parentElement;
+
+    // function - Function selector (Since: 1.10.3)
+    columnSelector = (index: number, data: any, node: HTMLTableCellElement) => true || false;
+
+    // jQuery - jQuery object of the column header nodes
+    columnSelector = $('thead th:first-child');
+
+    // array - Array containing any combination of the above options
+    columnSelector = [
+        undefined,
+        0,
+        '3:visIdx',
+        '3:visible',
+        'salary:name',
+        'td:nth-of-type(5)',
+        document.querySelector('th'),
+        document.querySelector('td'),
+        document.querySelector('[data-dt-column]'),
+        document.querySelector('[data-dt-column]').parentElement,
+        (index: number, data: any, node: HTMLTableCellElement) => true || false,
+        $('thead th:first-child')
+    ];
+};
+
+// cell-selector tests
+// https://datatables.net/reference/type/cell-selector
+() => {
+    let cellSelector: DataTables.CellSelector;
+
+    // No selector - Select all cells
+    cellSelector = undefined;
+
+    // string - jQuery selector
+    cellSelector = '#cell-2-42';
+
+    // node -  td / th cell
+    cellSelector = document.querySelector('th');
+    cellSelector = document.querySelector('td');
+
+    // node - Any element which has both a data-dt-row and data-dt-column attribute assigned to it, or a parent (Since: 1.10.11)
+    cellSelector = document.querySelector('[data-dt-row][data-dt-column]');
+    cellSelector = document.querySelector('[data-dt-row][data-dt-column]').parentElement;
+
+    // function - Function selector (Since: 1.10.3)
+    cellSelector = (index: number, data: any, node: HTMLTableCellElement) => true || false;
+
+    // jQuery - jQuery object of cell nodes
+    cellSelector = $('td.immediate');
+
+    // object - DataTables cell indexes (row and column properties)
+    cellSelector = { row: 1, column: 1 };
+
+    // array - Array containing any combination of the above options
+    cellSelector = [
+        undefined,
+        '#cell-2-42',
+        document.querySelector('th'),
+        document.querySelector('td'),
+        document.querySelector('[data-dt-row][data-dt-column]'),
+        document.querySelector('[data-dt-row][data-dt-column]').parentElement,
+        (index: number, data: any, node: HTMLTableCellElement) => true || false,
+        $('td.immediate'),
+        { row: 1, column: 1 }
+    ];
+};
+
+// selector-modifier tests
+// https://datatables.net/reference/type/selector-modifier
+() => {
+    let modifier: DataTables.SelectorModifier = {};
+
+    // order
+    modifier.order = 'current';
+    modifier.order = 'index';
+    modifier.order = 'applied';
+    modifier.order = 'original';
+
+    // page
+    modifier.page = 'all';
+    modifier.page = 'current';
+
+    // search
+    modifier.search = 'none';
+    modifier.search = 'applied';
+    modifier.search = 'removed';
+};
+
+// table(table-selector) tests
+// https://datatables.net/reference/api/table()
+() => {
+    const dt: DataTables.Api = $('#example').DataTable();
+
+    // Select the first table found
+    () => {
+        let table: DataTables.TableMethods = dt.table();
+    };
+
+    // Select the first table found
+    () => {
+        let table: DataTables.TableMethods = dt.table(undefined);
+    };
+
+    // Select the first table found by any table-selector
+    () => {
+        let selector: DataTables.TableSelector;
+        let table: DataTables.TableMethods = dt.table(selector);
+    };
+};
+
+// tables() tests
+// https://datatables.net/reference/api/tables()
+() => {
+    const dt: DataTables.Api = $('#example').DataTable();
+
+    // Select all tables
+    () => {
+        let tables: DataTables.TablesMethods = dt.tables();
+    };
+};
+
+// tables(table-selector) tests
+// https://datatables.net/reference/api/tables()
+() => {
+    const dt: DataTables.Api = $('#example').DataTable();
+
+    // Select all tables
+    () => {
+        let tables: DataTables.TablesMethods = dt.tables(undefined);
+    };
+
+    // Select all tables found by any table-selector
+    () => {
+        let selector: DataTables.TableSelector;
+        let tables: DataTables.TablesMethods = dt.tables(selector);
+    };
+};
+
+// row([selector-modifier]) tests
+// https://datatables.net/reference/api/row()
+() => {
+    const dt: DataTables.Api = $('#example').DataTable();
+
+    // Select the first row found
+    () => {
+        let row: DataTables.RowMethods = dt.row();
+    };
+
+    // Select the first row found by any selector-modifier
+    () => {
+        let modifier: DataTables.SelectorModifier;
+        let row: DataTables.RowMethods = dt.row(modifier);
+    };
+};
+
+// row(row-selector, [selector-modifier]) tests
+// https://datatables.net/reference/api/row()
+() => {
+    const dt: DataTables.Api = $('#example').DataTable();
+
+    // Select the first row found
+    () => {
+        let row: DataTables.RowMethods = dt.row(undefined);
+    };
+
+    // Select the first row found by any selector-modifier
+    () => {
+        let modifier: DataTables.SelectorModifier;
+        let row: DataTables.RowMethods = dt.row(undefined, modifier);
+    };
+
+    // Select the first row found by any row-selector
+    () => {
+        let selector: DataTables.RowSelector;
+        let row: DataTables.RowMethods = dt.row(selector);
+    };
+
+    // Select the first row found by any row-selector and a selector-modifier
+    () => {
+        let selector: DataTables.RowSelector;
+        let modifier: DataTables.SelectorModifier;
+        let row: DataTables.RowMethods = dt.row(selector, modifier);
+    };
+};
+
+// rows([selector-modifier]) tests
+// https://datatables.net/reference/api/rows()
+() => {
+    const dt: DataTables.Api = $('#example').DataTable();
+
+    // Select all rows
+    () => {
+        let rows: DataTables.RowsMethods = dt.rows();
+    };
+
+    // Select all rows found by any selector-modifier
+    () => {
+        let modifier: DataTables.SelectorModifier;
+        let rows: DataTables.RowsMethods = dt.rows(modifier);
+    };
+};
+
+// rows(row-selector, [selector-modifier]) tests
+// https://datatables.net/reference/api/rows()
+() => {
+    const dt: DataTables.Api = $('#example').DataTable();
+
+    // Select all rows
+    () => {
+        let rows: DataTables.RowsMethods = dt.rows(undefined);
+    };
+
+    // Select all rows found by any selector-modifier
+    () => {
+        let modifier: DataTables.SelectorModifier;
+        let rows: DataTables.RowsMethods = dt.rows(undefined, modifier);
+    };
+
+    // Select all rows found by any row-selector
+    () => {
+        let selector: DataTables.RowSelector;
+        let rows: DataTables.RowsMethods = dt.rows(selector);
+    };
+
+    // Select all rows found by any row-selector and a selector-modifier
+    () => {
+        let selector: DataTables.RowSelector;
+        let modifier: DataTables.SelectorModifier;
+        let rows: DataTables.RowsMethods = dt.rows(selector, modifier);
+    };
+};
+
+// column([selector-modifier]) tests
+// https://datatables.net/reference/api/column()
+() => {
+    const dt: DataTables.Api = $('#example').DataTable();
+
+    // Select the first column found
+    () => {
+        let column: DataTables.ColumnMethods = dt.column();
+    };
+
+    // Select the first column found by any selector-modifier
+    () => {
+        let modifier: DataTables.SelectorModifier;
+        let column: DataTables.ColumnMethods = dt.column(modifier);
+    };
+};
+
+// column(column-selector, [selector-modifier]) tests
+// https://datatables.net/reference/api/column()
+() => {
+    const dt: DataTables.Api = $('#example').DataTable();
+
+    // Select the first column found
+    () => {
+        let column: DataTables.ColumnMethods = dt.column(undefined);
+    };
+
+    // Select the first column found by any selector-modifier
+    () => {
+        let modifier: DataTables.SelectorModifier;
+        let column: DataTables.ColumnMethods = dt.column(undefined, modifier);
+    };
+
+    // Select the first column found by any column-selector
+    () => {
+        let selector: DataTables.ColumnSelector;
+        let column: DataTables.ColumnMethods = dt.column(selector);
+    };
+
+    // Select the first column found by any column-selector and selector-modifier
+    () => {
+        let selector: DataTables.ColumnSelector;
+        let modifier: DataTables.SelectorModifier;
+        let column: DataTables.ColumnMethods = dt.column(selector, modifier);
+    };
+};
+
+// columns([selector-modifier]) tests
+// https://datatables.net/reference/api/columns()
+() => {
+    const dt: DataTables.Api = $('#example').DataTable();
+
+    // Select all columns found
+    () => {
+        let columns: DataTables.ColumnsMethods = dt.columns();
+    };
+
+    // Select all columns found by any selector-modifier
+    () => {
+        let modifier: DataTables.SelectorModifier;
+        let columns: DataTables.ColumnsMethods = dt.columns(modifier);
+    };
+};
+
+// columns(column-selector, [selector-modifier]) tests
+// https://datatables.net/reference/api/columns()
+() => {
+    const dt: DataTables.Api = $('#example').DataTable();
+
+    // Select all columns found
+    () => {
+        let columns: DataTables.ColumnsMethods = dt.columns(undefined);
+    };
+
+    // Select all columns found by any selector-modifier
+    () => {
+        let modifier: DataTables.SelectorModifier;
+        let columns: DataTables.ColumnsMethods = dt.columns(undefined, modifier);
+    };
+
+    // Select all columns found by any column-selector
+    () => {
+        let selector: DataTables.ColumnSelector;
+        let columns: DataTables.ColumnsMethods = dt.columns(selector);
+    };
+
+    // Select all columns found by any column-selector and selector-modifier
+    () => {
+        let selector: DataTables.ColumnSelector;
+        let modifier: DataTables.SelectorModifier;
+        let columns: DataTables.ColumnsMethods = dt.columns(selector, modifier);
+    };
+};
+
+// cell([selector-modifier]) tests
+// https://datatables.net/reference/api/cell()
+() => {
+    const dt: DataTables.Api = $('#example').DataTable();
+
+    // Select the first cell found
+    () => {
+        let cell: DataTables.CellMethods = dt.cell();
+    };
+
+    // Select the first cell found by any selector-modifier
+    () => {
+        let modifier: DataTables.SelectorModifier;
+        let cell: DataTables.CellMethods = dt.cell(modifier);
+    };
+};
+
+// cell(cell-selector, [selector-modifier]) tests
+// https://datatables.net/reference/api/cell()
+() => {
+    const dt: DataTables.Api = $('#example').DataTable();
+
+    // Select the first cell found
+    () => {
+        let cell: DataTables.CellMethods = dt.cell(undefined);
+    };
+
+    // Select the first cell found by any selector-modifier
+    () => {
+        let modifier: DataTables.SelectorModifier;
+        let cell: DataTables.CellMethods = dt.cell(undefined, modifier);
+    };
+
+    // Select the first cell found by any cell-selector
+    () => {
+        let selector: DataTables.CellSelector;
+        let cell: DataTables.CellMethods = dt.cell(selector);
+    };
+
+    // Select the first cell found by any cell-selector and selector-modifier
+    () => {
+        let selector: DataTables.CellSelector;
+        let modifier: DataTables.SelectorModifier;
+        let cell: DataTables.CellMethods = dt.cell(selector, modifier);
+    };
+};
+
+// cell(row-selector, column-selector, [selector-modifier]) tests
+// https://datatables.net/reference/api/cell()
+() => {
+    const dt: DataTables.Api = $('#example').DataTable();
+
+    // Select the first cell found
+    () => {
+        let cell: DataTables.CellMethods = dt.cell(undefined, undefined);
+    };
+
+    // Select the first cell found by a any selector-modifier
+    () => {
+        let modifier: DataTables.SelectorModifier;
+        let cell: DataTables.CellMethods = dt.cell(undefined, undefined, modifier);
+    };
+
+    // Select the first cell found by any row-selector and column-selector
+    () => {
+        let rowSelector: DataTables.RowSelector;
+        let columnSelector: DataTables.ColumnSelector;
+        let cell: DataTables.CellMethods = dt.cell(rowSelector, columnSelector);
+    };
+
+    // Select the first cell found by any row-selector and column-selector and selector-modifier
+    () => {
+        let rowSelector: DataTables.RowSelector;
+        let columnSelector: DataTables.ColumnSelector;
+        let modifier: DataTables.SelectorModifier;
+        let cell: DataTables.CellMethods = dt.cell(rowSelector, columnSelector, modifier);
+    };
+};
+
+// cells([selector-modifier]) tests
+// https://datatables.net/reference/api/cells()
+() => {
+    const dt: DataTables.Api = $('#example').DataTable();
+
+    // Select all cells found
+    () => {
+        let cells: DataTables.CellsMethods = dt.cells();
+    };
+
+    // Select all cells found by any selector-modifier
+    () => {
+        let modifier: DataTables.SelectorModifier;
+        let cells: DataTables.CellsMethods = dt.cells(modifier);
+    };
+};
+
+// cells(cell-selector, [selector-modifier]) tests
+// https://datatables.net/reference/api/cells()
+() => {
+    const dt: DataTables.Api = $('#example').DataTable();
+
+    // Select all cells found
+    () => {
+        let cells: DataTables.CellsMethods = dt.cells(undefined);
+    };
+
+    // Select all cells found by any selector-modifier
+    () => {
+        let modifier: DataTables.SelectorModifier;
+        let cells: DataTables.CellsMethods = dt.cells(undefined, modifier);
+    };
+
+    // Select all cells found by any cell-selector
+    () => {
+        let selector: DataTables.CellSelector;
+        let cells: DataTables.CellsMethods = dt.cells(selector);
+    };
+
+    // Select all cells found by any cell-selector and selector-modifier
+    () => {
+        let selector: DataTables.CellSelector;
+        let modifier: DataTables.SelectorModifier;
+        let cells: DataTables.CellsMethods = dt.cells(selector, modifier);
+    };
+};
+
+// cells(row-selector, column-selector, [selector-modifier]) tests
+// https://datatables.net/reference/api/cells()
+() => {
+    const dt: DataTables.Api = $('#example').DataTable();
+
+    // Select all cells found
+    () => {
+        let cells: DataTables.CellsMethods = dt.cells(undefined, undefined);
+    };
+
+    // Select all cells found by any selector-modifier
+    () => {
+        let modifier: DataTables.SelectorModifier;
+        let cells: DataTables.CellsMethods = dt.cells(undefined, undefined, modifier);
+    };
+
+    // Select all cells found by any row-selector and column-selector
+    () => {
+        let rowSelector: DataTables.RowSelector;
+        let columnSelector: DataTables.ColumnSelector;
+        let cells: DataTables.CellsMethods = dt.cells(rowSelector, columnSelector);
+    };
+
+    // Select all cells found by any row-selector and column-selector and selector-modifier
+    () => {
+        let rowSelector: DataTables.RowSelector;
+        let columnSelector: DataTables.ColumnSelector;
+        let modifier: DataTables.SelectorModifier;
+        let cells: DataTables.CellsMethods = dt.cells(rowSelector, columnSelector, modifier);
+    };
+};
