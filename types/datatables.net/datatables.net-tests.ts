@@ -1,28 +1,31 @@
+// tslint:disable:only-arrow-functions
+// tslint:disable:space-before-function-paren
+// tslint:disable:no-var
 $(document).ready(function () {
     //#region "Language"
 
     var lang: DataTables.LanguageSettings = {
-        "emptyTable": "No data available in table",
-        "info": "Showing _START_ to _END_ of _TOTAL_ entries",
-        "infoEmpty": "Showing 0 to 0 of 0 entries",
-        "infoFiltered": "(filtered from _MAX_ total entries)",
-        "infoPostFix": "",
-        "thousands": ",",
-        "lengthMenu": "Show _MENU_ entries",
-        "loadingRecords": "Loading...",
-        "processing": "Processing...",
-        "search": "Search:",
-        "searchPlaceholder": "Default text",
-        "zeroRecords": "No matching records found",
-        "paginate": {
-            "first": "First",
-            "last": "Last",
-            "next": "Next",
-            "previous": "Previous"
+        emptyTable: "No data available in table",
+        info: "Showing _START_ to _END_ of _TOTAL_ entries",
+        infoEmpty: "Showing 0 to 0 of 0 entries",
+        infoFiltered: "(filtered from _MAX_ total entries)",
+        infoPostFix: "",
+        thousands: ",",
+        lengthMenu: "Show _MENU_ entries",
+        loadingRecords: "Loading...",
+        processing: "Processing...",
+        search: "Search:",
+        searchPlaceholder: "Default text",
+        zeroRecords: "No matching records found",
+        paginate: {
+            first: "First",
+            last: "Last",
+            next: "Next",
+            previous: "Previous"
         },
-        "aria": {
-            "sortAscending": ": activate to sort column ascending",
-            "sortDescending": ": activate to sort column descending"
+        aria: {
+            sortAscending: ": activate to sort column ascending",
+            sortDescending: ": activate to sort column descending"
         }
     };
 
@@ -31,8 +34,7 @@ $(document).ready(function () {
     //#region "Column"
 
     var colCreatedCellFunc: DataTables.FunctionColumnCreatedCell = function (cell, cellData, rowData, rowIndex, colIndex) {
-
-    }
+    };
 
     var colDataObject: DataTables.ObjectColumnData = {
         _: "phone",
@@ -83,85 +85,78 @@ $(document).ready(function () {
         }
     };
 
+    colRenderFunc({}, undefined, {}, null);
     colRenderFunc({}, 'filter', {}, null);
     colRenderFunc({}, 'display', {}, null);
     colRenderFunc({}, 'type', {}, null);
     colRenderFunc({}, 'sort', {}, null);
-    colRenderFunc({}, undefined, {}, null);
     colRenderFunc({}, 'custom value', {}, null);
 
-    var col: DataTables.ColumnSettings =
-        {
-            cellType: "th",
-            className: "css",
-            contentPadding: "mmmm",
-            createdCell: colCreatedCellFunc,
-            data: 1,
-            defaultContent: "edit",
-            name: "name",
-            orderable: true,
-            orderData: 10,
-            orderDataType: "dom-checkbox",
-            orderSequence: ['asc', 'desc'],
-            render: 1,
-            searchable: true,
-            title: "title",
-            visible: true,
-            width: "200px"
-        }
-    col =
-        {
-            data: "",
-            orderData: [10, 11, 20],
-            render: "",
-        }
-    col =
-        {
-            data: colDataObject,
-            render: colRenderObject,
-        }
-    col =
-        {
-            data: colDataFunc,
-            render: colRenderFunc,
-        }
+    var col: DataTables.ColumnSettings = {
+        cellType: "th",
+        className: "css",
+        contentPadding: "mmmm",
+        createdCell: colCreatedCellFunc,
+        data: 1,
+        defaultContent: "edit",
+        name: "name",
+        orderable: true,
+        orderData: 10,
+        orderDataType: "dom-checkbox",
+        orderSequence: ['asc', 'desc'],
+        render: 1,
+        searchable: true,
+        title: "title",
+        visible: true,
+        width: "200px"
+    };
+    col = {
+        data: "",
+        orderData: [10, 11, 20],
+        render: "",
+    };
+    col = {
+        data: colDataObject,
+        render: colRenderObject,
+    };
+    col = {
+        data: colDataFunc,
+        render: colRenderFunc,
+    };
 
     //#endregion "Column"
 
     //#region "ColumnDef"
 
-    var colDef: DataTables.ColumnDefsSettings =
-        {
-            targets: 1,
-            cellType: "th",
-            className: "css",
-            contentPadding: "mmmm",
-            createdCell: colCreatedCellFunc,
-            data: 1,
-            defaultContent: "edit",
-            name: "name",
-            orderable: true,
-            orderData: 10,
-            orderDataType: "dom-checkbox",
-            orderSequence: ['asc', 'desc'],
-            render: 1,
-            searchable: true,
-            title: "title",
-            visible: true,
-            width: "200px"
-        };
+    var colDef: DataTables.ColumnDefsSettings = {
+        targets: 1,
+        cellType: "th",
+        className: "css",
+        contentPadding: "mmmm",
+        createdCell: colCreatedCellFunc,
+        data: 1,
+        defaultContent: "edit",
+        name: "name",
+        orderable: true,
+        orderData: 10,
+        orderDataType: "dom-checkbox",
+        orderSequence: ['asc', 'desc'],
+        render: 1,
+        searchable: true,
+        title: "title",
+        visible: true,
+        width: "200px"
+    };
 
-    colDef =
-        {
-            targets: "2",
-            cellType: "th",
-        };
+    colDef = {
+        targets: "2",
+        cellType: "th",
+    };
 
-    colDef =
-        {
-            targets: ["2", 5],
-            cellType: "th",
-        };
+    colDef = {
+        targets: ["2", 5],
+        cellType: "th",
+    };
 
     //#endregion "ColumnDef"
 
@@ -199,100 +194,95 @@ $(document).ready(function () {
 
     //#region "Settings"
 
-    var config: DataTables.Settings =
-        {
-            // columns
-            columns: [
-                col,
-                null,
-                col,
-                null,
-                col,
-                col
-            ],
-            columnDefs: [
-                null,
-                colDef,
-                colDef,
-                null,
-            ],
-            // Data
-            ajax: "url",
+    var config: DataTables.Settings = {
+        // columns
+        columns: [
+            col,
+            null,
+            col,
+            null,
+            col,
+            col
+        ],
+        columnDefs: [
+            null,
+            colDef,
+            colDef,
+            null,
+        ],
+        // Data
+        ajax: "url",
+        data: {},
+        // Features
+        autoWidth: true,
+        deferRender: true,
+        info: true,
+        jQueryUI: false,
+        lengthChange: true,
+        ordering: true,
+        paging: true,
+        scrollX: true,
+        scrollY: "200px",
+        searching: true,
+        serverSide: true,
+        stateSave: true,
+        // Options
+        deferLoading: 10,
+        destroy: true,
+        displayStart: 1,
+        dom: "lrtip",
+        lengthMenu: [1, 2, 3, 4],
+        orderCellsTop: true,
+        orderClasses: true,
+        order: [[0, 'asc'], [1, 'asc']],
+        orderFixed: [[0, 'asc'], [1, 'asc']],
+        orderMulti: true,
+        pageLength: 10,
+        pagingType: "simple",
+        retrieve: true,
+        renderer: "bootstrap",
+        rowId: "custId",
+        scrollCollapse: true,
+        search: true,
+        searchCols: [{ search: "", smart: true, regex: false, caseInsensitive: true }],
+        searchDelay: 10,
+        stateDuration: 10,
+        tabIndex: 10,
+    };
+
+    config = {
+        ajax: ajaxFunc,
+        deferLoading: [10, 100],
+        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        order: [0, 'asc'],
+        orderFixed: [[0, 'asc'], [1, 'asc']],
+        renderer: {
+            header: "bootstrap",
+            pageButton: "jqueryui"
+        },
+        search: { search: "", smart: true, regex: false, caseInsensitive: true },
+        searchCols: [
+            null,
+            { search: "", smart: true, regex: false, caseInsensitive: true },
+            { search: "" },
+            { search: "", smart: true },
+            null
+        ],
+    };
+
+    config = {
+        ajax: {
             data: {},
-            // Features
-            autoWidth: true,
-            deferRender: true,
-            info: true,
-            jQueryUI: false,
-            lengthChange: true,
-            ordering: true,
-            paging: true,
-            scrollX: true,
-            scrollY: "200px",
-            searching: true,
-            serverSide: true,
-            stateSave: true,
-            // Options
-            deferLoading: 10,
-            destroy: true,
-            displayStart: 1,
-            dom: "lrtip",
-            lengthMenu: [1, 2, 3, 4],
-            orderCellsTop: true,
-            orderClasses: true,
-            order: [[0, 'asc'], [1, 'asc']],
-            orderFixed: [[0, 'asc'], [1, 'asc']],
-            orderMulti: true,
-            pageLength: 10,
-            pagingType: "simple",
-            retrieve: true,
-            renderer: "bootstrap",
-            rowId: "custId",
-            scrollCollapse: true,
-            search: true,
-            searchCols: [{ "search": "", "smart": true, "regex": false, "caseInsensitive": true }],
-            searchDelay: 10,
-            stateDuration: 10,
-            tabIndex: 10,
-        };
+            dataSrc: "",
+        },
+    };
 
-
-    config =
-        {
-            ajax: ajaxFunc,
-            deferLoading: [10, 100],
-            lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-            order: [0, 'asc'],
-            orderFixed: [[0, 'asc'], [1, 'asc']],
-            renderer: {
-                header: "bootstrap",
-                pageButton: "jqueryui"
-            },
-            search: { "search": "", "smart": true, "regex": false, "caseInsensitive": true },
-            searchCols: [
-                null,
-                { "search": "", "smart": true, "regex": false, "caseInsensitive": true },
-                { "search": "" },
-                { "search": "", "smart": true },
-                null
-            ],
-        };
-
-    config =
-        {
-            ajax: {
-                data: {},
-                dataSrc: "",
-            },
-        };
-
-    config =
-        {
-            ajax: {
-                data: ajaxDataFunc,
-                dataSrc: function (data: any) { },
-            },
-        };
+    config = {
+        ajax: {
+            data: ajaxDataFunc,
+            dataSrc(data: any) { },
+        },
+    };
 
     //#endregion "Settings"
 
@@ -303,7 +293,7 @@ $(document).ready(function () {
         bBounding: true,
         bScrollbarLeft: true,
         bScrollOversize: true
-    }
+    };
 
     //#endregion
 
@@ -378,14 +368,14 @@ $(document).ready(function () {
 
     var page = dt.page.info();
     page = {
-        "page": 1,
-        "pages": 6,
-        "start": 10,
-        "end": 20,
-        "length": 10,
-        "recordsTotal": 57,
-        "recordsDisplay": 57,
-        "serverSide": false
+        page: 1,
+        pages: 6,
+        start: 10,
+        end: 20,
+        length: 10,
+        recordsTotal: 57,
+        recordsDisplay: 57,
+        serverSide: false
     };
 
     var page_len_get = dt.page.len();
@@ -400,7 +390,23 @@ $(document).ready(function () {
     var settings = dt.settings();
 
     var state = dt.state();
-    state = { "time": 1423772610230, "start": 0, "length": 25, "order": [[0, "asc"]], "search": { "search": "", "smart": true, "regex": false, "caseInsensitive": true }, "columns": [{ "visible": true, "search": { "search": "", "smart": true, "regex": false, "caseInsensitive": true } }, { "visible": true, "search": { "search": "", "smart": true, "regex": false, "caseInsensitive": true } }, { "visible": true, "search": { "search": "", "smart": true, "regex": false, "caseInsensitive": true } }, { "visible": true, "search": { "search": "", "smart": true, "regex": false, "caseInsensitive": true } }, { "visible": true, "search": { "search": "", "smart": true, "regex": false, "caseInsensitive": true } }, { "visible": true, "search": { "search": "", "smart": true, "regex": false, "caseInsensitive": true } }, { "visible": true, "search": { "search": "", "smart": true, "regex": false, "caseInsensitive": true } }, { "visible": true, "search": { "search": "", "smart": true, "regex": false, "caseInsensitive": true } }] };
+    state = {
+        time: 1423772610230,
+        start: 0,
+        length: 25,
+        order: [[0, "asc"]],
+        search: { search: "", smart: true, regex: false, caseInsensitive: true }, columns:
+        [
+            { visible: true, search: { search: "", smart: true, regex: false, caseInsensitive: true } },
+            { visible: true, search: { search: "", smart: true, regex: false, caseInsensitive: true } },
+            { visible: true, search: { search: "", smart: true, regex: false, caseInsensitive: true } },
+            { visible: true, search: { search: "", smart: true, regex: false, caseInsensitive: true } },
+            { visible: true, search: { search: "", smart: true, regex: false, caseInsensitive: true } },
+            { visible: true, search: { search: "", smart: true, regex: false, caseInsensitive: true } },
+            { visible: true, search: { search: "", smart: true, regex: false, caseInsensitive: true } },
+            { visible: true, search: { search: "", smart: true, regex: false, caseInsensitive: true } }
+        ]
+    };
     state = dt.state.loaded();
 
     var state_clear = dt.state.clear();
@@ -531,7 +537,7 @@ $(document).ready(function () {
     var cell_invalidate = cell.invalidate();
     var cell_invalidate = cell.invalidate("data");
     $('#example tbody').on('click', 'td', function () {
-        this.innerHTML = (parseInt(this.innerHTML) + 1).toString();
+        this.innerHTML = (parseInt(this.innerHTML, 10) + 1).toString();
         dt.cell(this).invalidate().draw();
     });
 
@@ -598,15 +604,13 @@ $(document).ready(function () {
             .join('<br>')
     );
 
-    //var idx = dt
+    // var idx = dt
     //    .columns('.check')
     //    .data()
     //    .eq(0) // Reduce the 2D array into a 1D array of data
     //    .indexOf('Yes');
 
     var columns_dataSrc = columns.dataSrc();
-    //alert('Data source: ' + dt.columns([0, 1]).dataSrc().join(' '));
-
     var columns_footer = columns.footer();
     var columns_header = columns.header();
     var columns_indexes = columns.indexes();
@@ -614,10 +618,10 @@ $(document).ready(function () {
     var columns_nodes = columns.nodes();
     dt
         .columns('.ready')
-        .nodes()
-    //.flatten()  // Reduce to a 1D array
-    //.to$()      // Convert to a jQuery object
-    //.addClass('highlight');
+        .nodes();
+    // .flatten()  // Reduce to a 1D array
+    // .to$()      // Convert to a jQuery object
+    // .addClass('highlight');
 
     var columns_search_get = columns.search();
     var columns_search_set = columns.search("string");
@@ -688,7 +692,7 @@ $(document).ready(function () {
 
     var column_footer = column.footer();
     var column_p = dt.column(0);
-    //$(column.footer()).html(
+    // $(column.footer()).html(
     //    column_p
     //        .data()
     //        .reduce(function (a, b) {
@@ -715,9 +719,9 @@ $(document).ready(function () {
 
     var column_nodes = column.nodes();
     dt.column(-1)
-        .nodes()
-    //.to$()      // Convert to a jQuery object
-    //.addClass('ready');
+        .nodes();
+    // .to$()      // Convert to a jQuery object
+    // .addClass('ready');
 
     var column_search_get = column.search();
     var column_search_set = column.search("string");
@@ -817,29 +821,29 @@ $(document).ready(function () {
 
     var table3 = $('#example').DataTable();
     table3.row.add({
-        "name": "Tiger Nixon",
-        "position": "System Architect",
-        "salary": "$3,120",
-        "start_date": "2011/04/25",
-        "office": "Edinburgh",
-        "extn": "5421"
+        name: "Tiger Nixon",
+        position: "System Architect",
+        salary: "$3,120",
+        start_date: "2011/04/25",
+        office: "Edinburgh",
+        extn: "5421"
     }).draw();
 
     var table4 = $('#example').DataTable();
     table4.row.add([{
-        "name": "Tiger Nixon",
-        "position": "System Architect",
-        "salary": "$3,120",
-        "start_date": "2011/04/25",
-        "office": "Edinburgh",
-        "extn": "5421"
+        name: "Tiger Nixon",
+        position: "System Architect",
+        salary: "$3,120",
+        start_date: "2011/04/25",
+        office: "Edinburgh",
+        extn: "5421"
     }, {
-        "name": "Garrett Winters",
-        "position": "Director",
-        "salary": "$5,300",
-        "start_date": "2011/07/25",
-        "office": "Edinburgh",
-        "extn": "8422"
+        name: "Garrett Winters",
+        position: "Director",
+        salary: "$5,300",
+        start_date: "2011/07/25",
+        office: "Edinburgh",
+        extn: "8422"
     }])
         .draw();
 
@@ -851,9 +855,9 @@ $(document).ready(function () {
         pupil,
     ])
         .draw();
-    //.nodes()
-    //.to$()
-    //.addClass('new');
+    // .nodes()
+    // .to$()
+    // .addClass('new');
 
     $('#example tbody').on('click', 'td.details-control', function () {
         var tr = $(this).parents('tr');
@@ -863,8 +867,7 @@ $(document).ready(function () {
             // This row is already open - close it
             row.child.hide();
             tr.removeClass('shown');
-        }
-        else {
+        } else {
             // Open this row (the format() function would return the data to be shown)
             row.child("").show();
             tr.addClass('shown');
@@ -902,8 +905,7 @@ $(document).ready(function () {
             // This row is already open - close it
             row.child.hide();
             tr.removeClass('shown');
-        }
-        else {
+        } else {
             // Open this row (the format() function would return the data to be shown)
             row.child("").show();
             tr.addClass('shown');
@@ -918,8 +920,7 @@ $(document).ready(function () {
             // This row is already open - remove it
             row.child.remove();
             tr.removeClass('shown');
-        }
-        else {
+        } else {
             // Open this row (the format() function would return the data to be shown)
             row.child("").show();
             tr.addClass('shown');
@@ -931,11 +932,11 @@ $(document).ready(function () {
     //#region "Methods-Static"
 
     // With boolean parameter type, always returns DataTables.DataTable[].
-    var static_1: DataTables.Api[] = <DataTables.Api[]>$.fn.dataTable.tables(true);
+    var static_1: DataTables.Api[] = $.fn.dataTable.tables(true) as DataTables.Api[];
     // With object parameter type, returns DataTables.DataTable[] when "api" property is false.
-    static_1 = <DataTables.Api[]>$.fn.dataTable.tables({ "visible": true, "api": false });
+    static_1 = $.fn.dataTable.tables({ visible: true, api: false }) as DataTables.Api[];
     // With object parameter type, returns DataTables.DataTable when "api" property is true.
-    var static_2: DataTables.Api = <DataTables.Api>$.fn.dataTable.tables({ "visible": true, "api": true });
+    var static_2: DataTables.Api = $.fn.dataTable.tables({ visible: true, api: true }) as DataTables.Api;
 
     //#endregion "Methods-Static"
 
