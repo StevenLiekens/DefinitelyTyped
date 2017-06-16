@@ -5,20 +5,15 @@
 // TypeScript Version: 2.3
 
 // missing:
-// - Static methods that are defined in JQueryStatic.fn are not typed.
 // - Plugin and extension definitions are not typed.
 // - Some return types are not fully working
 
 /// <reference types="jquery" />
 
 interface JQuery {
-    DataTable(opts?: DataTables.Settings): DataTables.Api;
+    dataTable: DataTables.StaticFunctions;
+    DataTable(param?: DataTables.Settings): DataTables.Api;
 }
-
-//TODO: Wrong, as jquery.d.ts has no interface for fn
-//interface JQueryStatic {
-//    dataTable: DataTables.StaticFunctions;
-//}
 
 declare namespace DataTables {
     export interface Api extends CoreMethods {

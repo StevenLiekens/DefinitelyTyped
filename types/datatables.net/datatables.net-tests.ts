@@ -930,15 +930,12 @@ $(document).ready(function () {
 
     //#region "Methods-Static"
 
-    // Variable is a stand-in for $.fn.dataTable. See extension of JQueryStatic at the top of index.d.ts.
-    var staticFn: DataTables.StaticFunctions;
-
     // With boolean parameter type, always returns DataTables.DataTable[].
-    var static_1: DataTables.Api[] = <DataTables.Api[]>staticFn.tables(true);
+    var static_1: DataTables.Api[] = <DataTables.Api[]>$.fn.dataTable.tables(true);
     // With object parameter type, returns DataTables.DataTable[] when "api" property is false.
-    static_1 = <DataTables.Api[]>staticFn.tables({ "visible": true, "api": false });
+    static_1 = <DataTables.Api[]>$.fn.dataTable.tables({ "visible": true, "api": false });
     // With object parameter type, returns DataTables.DataTable when "api" property is true.
-    var static_2: DataTables.Api = <DataTables.Api>staticFn.tables({ "visible": true, "api": true });
+    var static_2: DataTables.Api = <DataTables.Api>$.fn.dataTable.tables({ "visible": true, "api": true });
 
     //#endregion "Methods-Static"
 
