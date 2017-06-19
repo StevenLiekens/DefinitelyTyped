@@ -1,6 +1,6 @@
 // Type definitions for datatables.net 1.10
 // Project: https://datatables.net
-// Definitions by: Kiarash Ghiaseddin <https://github.com/Silver-Connection/DefinitelyTyped>, Omid Rad <https://github.com/omidkrad>, Armin Sander <https://github.com/pragmatrix/>, Denise Mauldin <https://github.com/denisemauldin/>
+// Definitions by: Kiarash Ghiaseddin <https://github.com/Silver-Connection/DefinitelyTyped>, Omid Rad <https://github.com/omidkrad>, Armin Sander <https://github.com/pragmatrix/>, Denise Mauldin <https://github.com/denisemauldin/>, Steven Liekens <https://github.com/StevenLiekens/>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 // TypeScript Version: 2.3
 
