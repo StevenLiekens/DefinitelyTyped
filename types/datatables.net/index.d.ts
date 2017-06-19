@@ -385,7 +385,7 @@ declare namespace DataTables {
 
     //#region "util-methods"
 
-    interface UtilityMethods {
+    interface UtilityMethods extends ArrayLike<any> {
         /**
         * Get a boolean value to indicate if there are any entries in the API instance's result set (i.e. any data, selected rows, etc).
         */

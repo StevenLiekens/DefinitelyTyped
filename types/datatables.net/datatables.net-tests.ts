@@ -1549,3 +1549,20 @@ $(document).ready(function () {
         let cells: DataTables.CellsMethods = dt.cells(rowSelector, columnSelector, modifier);
     };
 };
+
+// API structure tests
+// https://datatables.net/reference/type/DataTables.Api
+() => {
+    const dt: DataTables.Api = $('#example').DataTable();
+
+    // The API object is array-like, in that it has a length property
+    let length: number = dt.length;
+
+    // Elements in its result set can be access using Javascript array notation ([])
+    let first: any = dt[0];
+
+    // It provides many (although not all) of the same methods as an array (for example push() and indexOf()).
+    let newItem: any = {};
+    let newLength: number = dt.push(newItem);
+    let indexofNewItem: number = dt.indexOf(newItem);
+};
