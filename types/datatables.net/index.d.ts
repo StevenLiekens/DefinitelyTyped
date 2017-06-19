@@ -1118,8 +1118,14 @@ declare namespace DataTables {
     //#endregion "Namespaces"
 
     //#region "Static-Methods"
+    export type ErrorHandler = (settings: Settings, techNote: number, message: string) => void;
+
+    export interface Extensions {
+        errMode: 'alert' | 'throw' | 'none' | ErrorHandler;
+    }
 
     export interface StaticFunctions {
+        ext: Extensions;
         /**
         * Check is a table node is a DataTable or not
         *

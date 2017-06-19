@@ -1566,3 +1566,20 @@ $(document).ready(function () {
     let newLength: number = dt.push(newItem);
     let indexofNewItem: number = dt.indexOf(newItem);
 };
+
+// $.fn.dataTable.ext.errMode tests
+// https://datatables.net/reference/option/%24.fn.dataTable.ext.errMode
+() => {
+    // alert (default) - Alert the error
+    $.fn.dataTable.ext.errMode = 'alert';
+
+    // throw - Throw a Javascript error
+    $.fn.dataTable.ext.errMode = 'throw';
+
+    // none - Do nothing
+    $.fn.dataTable.ext.errMode = 'none';
+
+    // As a function you may provide your own error handling, for example showing a message to the end user or reloading the page to recover from an error situation.
+    $.fn.dataTable.ext.errMode = (settings: DataTables.Settings, techNote: number, message: string): void => {
+    };
+};
