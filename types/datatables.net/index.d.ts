@@ -222,14 +222,18 @@ declare namespace DataTables {
 
     //#region "ajax-methods"
 
-    interface AjaxMethods extends Api {
+    interface LoadCallback {
+        (json: AjaxData): void;
+    }
+
+    interface UrlMethods extends Api {
         /**
-         * Reload the table data from the Ajax data source.
+         * Trigger a load of an Ajax data source when a URl has been set using the ajax.url() method.
          *
          * @param callback Function which is executed when the data as been reloaded and the table fully redrawn.
          * @param resetPaging Reset (default action or true) or hold the current paging position (false).
          */
-        load(callback?: Function, resetPaging?: boolean): Api;
+        load(callback?: LoadCallback, resetPaging?: boolean): Api;
     }
 
     interface AjaxMethodModel {
@@ -249,10 +253,10 @@ declare namespace DataTables {
          * @param callback Function which is executed when the data as been reloaded and the table fully redrawn.
          * @param resetPaging Reset (default action or true) or hold the current paging position (false).
          */
-        reload(callback?: Function, resetPaging?: boolean): Api;
+        reload(callback?: LoadCallback, resetPaging?: boolean): Api;
 
         /**
-         * Reload the table data from the Ajax data source
+         * Get the URL that DataTables uses to Ajax fetch data.
          */
         url(): string;
 
@@ -261,7 +265,7 @@ declare namespace DataTables {
          *
          * @param url URL to set to be the Ajax data source for the table.
          */
-        url(url: string): AjaxMethods;
+        url(url: string): UrlMethods;
     }
 
     //#endregion "ajax-methods"
