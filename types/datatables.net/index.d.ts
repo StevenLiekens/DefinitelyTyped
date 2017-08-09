@@ -1126,8 +1126,16 @@ declare namespace DataTables {
         errMode: 'alert' | 'throw' | 'none' | ErrorHandler;
     }
 
+    interface ColumnRender {
+        text(): ObjectColumnRender;
+        number(thousands: string, decimal: string, precision?: number, prefix?: string, postfix?: string): ObjectColumnRender;
+    }
+
     interface StaticFunctions {
         ext: Extensions;
+
+        render: ColumnRender;
+
         /**
          * Check is a table node is a DataTable or not
          *
@@ -1657,7 +1665,12 @@ declare namespace DataTables {
         sort?: string;
     }
 
-    interface ObjectColumnRender extends ObjectColumnData {
+    interface ObjectColumnRender {
+        _?: string;
+        filter?: string;
+        display?: string;
+        type?: string;
+        sort?: string;
     }
 
     interface FunctionColumnRender {

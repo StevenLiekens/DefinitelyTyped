@@ -124,6 +124,13 @@ $(document).ready(function () {
         render: colRenderFunc,
     };
 
+    col.render = $.fn.dataTable.render.text();
+
+    col.render = $.fn.dataTable.render.number(',', '.');
+    col.render = $.fn.dataTable.render.number(',', '.', 2);
+    col.render = $.fn.dataTable.render.number(',', '.', 2, '$');
+    col.render = $.fn.dataTable.render.number(',', '.', 2, '', 'USD');
+
     //#endregion "Column"
 
     //#region "ColumnDef"
