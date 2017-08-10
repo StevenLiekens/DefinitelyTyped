@@ -1652,17 +1652,16 @@ declare namespace DataTables {
 
     type FunctionColumnCreatedCell = (cell: Node, cellData: any, rowData: any, row: number, col: number) => void;
 
-    interface FunctionColumnData {
-        (row: any, t: 'set', s: any, meta: CellMetaSettings): void;
-        (row: any, t: 'display' | 'sort' | 'filter' | 'type', s: undefined, meta: CellMetaSettings): any;
+    interface FunctionColumnData<RequestType = 'set' | 'filter' | 'display' | 'type' | 'sort' | undefined> {
+        (row: any, type: RequestType, set: any | undefined, meta: CellMetaSettings): any;
     }
 
     interface ObjectColumnData {
-        _: string;
-        filter?: string;
-        display?: string;
-        type?: string;
-        sort?: string;
+        _: number | string | FunctionColumnData;
+        filter?: number | string | FunctionColumnData<'filter'>;
+        display?: number | string | FunctionColumnData<'display'>;
+        type?: number | string | FunctionColumnData<'type'>;
+        sort?: number | string | FunctionColumnData<'sort'>;
     }
 
     interface ObjectColumnRender {

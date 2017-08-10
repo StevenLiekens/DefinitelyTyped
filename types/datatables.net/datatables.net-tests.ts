@@ -94,7 +94,6 @@ $(document).ready(function () {
     colRenderFunc({}, 'sort', {}, null);
     col.render = colRenderFunc;
 
-
     // Extensibility: the render type can be a custom value, useful for plugins that require custom rendering.
     // Example: https://datatables.net/reference/option/responsive.orthogonal
     var colRenderFuncWithCustomValue: DataTables.FunctionColumnRender<'filter' | 'display' | 'type' | 'sort' | 'responsive' | undefined> = (
