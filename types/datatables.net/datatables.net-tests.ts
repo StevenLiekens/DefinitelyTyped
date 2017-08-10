@@ -277,7 +277,7 @@ $(document).ready(function () {
         renderer: "bootstrap",
         rowId: "custId",
         scrollCollapse: true,
-        search: true,
+        search: { search: '' },
         searchCols: [{ search: "", smart: true, regex: false, caseInsensitive: true }],
         searchDelay: 10,
         stateDuration: 10,
