@@ -63,7 +63,11 @@ $(document).ready(function () {
         sort: "asc"
     };
 
-    var colRenderFunc: DataTables.FunctionColumnRender = (data: any, type: 'filter' | 'display' | 'type' | 'sort' | undefined | any, row: any, meta: DataTables.CellMetaSettings): any => {
+    var colRenderFunc: DataTables.FunctionColumnRender = (
+        data: any,
+        type: 'filter' | 'display' | 'type' | 'sort' | undefined,
+        row: any,
+        meta: DataTables.CellMetaSettings): any => {
         meta.col;
         meta.row;
         meta.settings;
@@ -79,9 +83,7 @@ $(document).ready(function () {
             case 'sort':
                 return data.sortValue;
             default:
-                // Extensibility: the render type can be a custom value, useful for plugins that require custom rendering.
-                // Custom values are declared as any.
-                return data.valueForPlugin;
+                return data.value;
         }
     };
 
@@ -90,7 +92,33 @@ $(document).ready(function () {
     colRenderFunc({}, 'display', {}, null);
     colRenderFunc({}, 'type', {}, null);
     colRenderFunc({}, 'sort', {}, null);
-    colRenderFunc({}, 'custom value', {}, null);
+    col.render = colRenderFunc;
+
+
+    // Extensibility: the render type can be a custom value, useful for plugins that require custom rendering.
+    // Example: https://datatables.net/reference/option/responsive.orthogonal
+    var colRenderFuncWithCustomValue: DataTables.FunctionColumnRender<'filter' | 'display' | 'type' | 'sort' | 'responsive' | undefined> = (
+        data: any,
+        type: 'filter' | 'display' | 'type' | 'sort' | 'responsive' | undefined,
+        row: any,
+        meta: DataTables.CellMetaSettings): any => {
+        meta.col;
+        meta.row;
+        meta.settings;
+        if (type === 'responsive') {
+            return data.valueForPlugin;
+        } else {
+            return colRenderFunc(data, type, row, meta);
+        }
+    };
+
+    colRenderFuncWithCustomValue({}, undefined, {}, null);
+    colRenderFuncWithCustomValue({}, 'filter', {}, null);
+    colRenderFuncWithCustomValue({}, 'display', {}, null);
+    colRenderFuncWithCustomValue({}, 'type', {}, null);
+    colRenderFuncWithCustomValue({}, 'sort', {}, null);
+    colRenderFuncWithCustomValue({}, 'responsive', {}, null);
+    col.render = colRenderFuncWithCustomValue;
 
     var col: DataTables.ColumnSettings = {
         cellType: "th",

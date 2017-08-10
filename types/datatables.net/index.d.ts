@@ -1666,15 +1666,15 @@ declare namespace DataTables {
     }
 
     interface ObjectColumnRender {
-        _?: string;
-        filter?: string;
-        display?: string;
-        type?: string;
-        sort?: string;
+        _?: number | string | FunctionColumnRender;
+        filter?: number | string | FunctionColumnRender<'filter'>;
+        display?: number | string | FunctionColumnRender<'display'>;
+        type?: number | string | FunctionColumnRender<'type'>;
+        sort?: number | string | FunctionColumnRender<'sort'>;
     }
 
-    interface FunctionColumnRender {
-        (data: any, type: 'filter' | 'display' | 'type' | 'sort' | undefined | any, row: any, meta: CellMetaSettings): any;
+    interface FunctionColumnRender<RequestType = 'filter' | 'display' | 'type' | 'sort' | undefined> {
+        (data: any, type: RequestType, row: any, meta: CellMetaSettings): any;
     }
 
     interface CellMetaSettings {
